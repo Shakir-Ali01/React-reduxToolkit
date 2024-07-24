@@ -1,10 +1,20 @@
 import React from "react";
 
 import { DeleteAllUser } from "./DeleteAllUser";
-
+import DisplayUsers from "./DisplayUsers";
 import styled from "styled-components";
-
+import { fakeUserData } from "../api";
+import { useDispatch } from "react-redux";
+//importing action creator which is create in userSlice like addUser DeleteUsers,updateUsers
+import { addUser } from "../store/slices/UserSlice";
 const UserDetails = () => {
+    const dispatch=useDispatch();
+    const addNewUser=(payload)=>{
+        console.log(payload);
+        //call the addUser function (micro reducer) of UsersliceReducer which will adding the data into redux store
+        dispatch(addUser(payload));
+
+    }
 
  return (
 
@@ -16,17 +26,17 @@ const UserDetails = () => {
 
      <div className="admin-subtitle">List of User Details</div>
 
-     <button className="btn add-btn">Add New Users</button>
+     <button className="btn add-btn" onClick={()=>addNewUser(fakeUserData())}>Add New Users</button>
 
     </div>
 
-    <ul>
+    
 
-     {/* <li>Hi</li>
+<DisplayUsers/>
 
-     <li>Hii</li> */}
+    
 
-    </ul>
+  
 
     <hr />
 
